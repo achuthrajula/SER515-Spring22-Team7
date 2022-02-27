@@ -22,17 +22,20 @@ class Controller:
                 """
             )
 
-            if input_command == "k":
-                os.system(
-                    f"gazebo --verbose {os.getcwd()}/Gazebo-Worlds/alpha_gazebo_environment.world")
-            elif input_command == "w":
+            if input_command == "w":
                 os.system(
                     "ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 1.0}}' -1")
                 speed_input = 1
-                while speed_input != 0:
-                    speed_input = float(
-                        input("Input 1 to 9 to set velocity and 0 to return to controller \n"))
-                    if (speed_input >= 1.0 and speed_input <= 9.0):
+                user_input = ''
+                while user_input != 'x':
+                    user_input = input()
+                    if (user_input == "q"):
+                        speed_input += 1
+                        value = f'{{linear: {{x: {speed_input}}}}}'
+                        os.system(
+                            f"ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{value}' -1")
+                    elif (user_input == "e"):
+                        speed_input -= 1
                         value = f'{{linear: {{x: {speed_input}}}}}'
                         os.system(
                             f"ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{value}' -1")
@@ -40,10 +43,16 @@ class Controller:
                 os.system(
                     "ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: -1.0}}' -1")
                 speed_input = 1
-                while speed_input != 0:
-                    speed_input = float(
-                        input("Input 1 to 9 to set velocity and 0 to return to controller \n"))
-                    if (speed_input >= 1.0 and speed_input <= 9.0):
+                user_input = ''
+                while user_input != 'x':
+                    user_input = input()
+                    if (user_input == "q"):
+                        speed_input += 1
+                        value = f'{{linear: {{x: -{speed_input}}}}}'
+                        os.system(
+                            f"ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{value}' -1")
+                    elif (user_input == "e"):
+                        speed_input -= 1
                         value = f'{{linear: {{x: -{speed_input}}}}}'
                         os.system(
                             f"ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{value}' -1")
