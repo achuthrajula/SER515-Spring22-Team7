@@ -1,6 +1,6 @@
 from ezRos.controller import Controller
-from ezRos.test_launch import TestDrive
-import launch
+from ezRos.test_environment import TestDrive
+from ezRos.launch import Launcher
 
 def main():
     user_input = 0
@@ -10,7 +10,7 @@ def main():
             Choose a functionality to proceed: \n
             1. Launch testing ground
             2. Rover Controller
-            3. foo
+            3. Launch ROS 
             """
         )
         if user_input == '1':
@@ -19,6 +19,9 @@ def main():
         elif user_input == '2':
             control = Controller()
             control.controller()
+        elif user_input == '3':
+            launch = Launcher()
+            launch.launch()
     
 if __name__ == '__main__':
     main()
