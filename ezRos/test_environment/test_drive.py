@@ -9,4 +9,4 @@ class TestDrive:
     def launch(self):
         sys.path.append(os.getcwd())
 
-        os.system(f"gazebo --verbose {os.getcwd()}/Gazebo-Worlds/2x_alpha_gazebo_environment.world")
+        os.system(f"gazebo --verbose {os.getcwd()}/Gazebo-Worlds/test.world")
