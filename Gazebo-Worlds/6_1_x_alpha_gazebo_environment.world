@@ -1,14 +1,23 @@
 <?xml version="1.0"?>
 <!--
   Gazebo ROS differential drive plugin demo
+
   Try sending commands:
+
     ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 1.0}}' -1
+
     ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{angular: {z: 0.1}}' -1
+
   Try listening to odometry:
+
     ros2 topic echo /demo/odom_demo
+
   Try listening to TF:
+
     ros2 run tf2_ros tf2_echo odom_demo chassis
+
     ros2 run tf2_ros tf2_echo chassis right_wheel
+
     ros2 run tf2_ros tf2_echo chassis left_wheel
 -->
 <sdf version="1.6">
@@ -26,7 +35,7 @@
       <pose>0 0 0.325 0 -0 0</pose>
 
       <link name='chassis'>
-        <pose>-0.151427 -0 0.175 0 -0 0</pose>
+        <pose>-0.2 -0 0.2 0 -0 0</pose>
         <inertial>
           <mass>1.14395</mass>
           <inertia>
@@ -40,22 +49,24 @@
         </inertial>
         <visual name='visual'>
           <geometry>
-            <box>
-              <size>2.01142 1 0.568726</size>
-            </box>
+            <mesh>
+              <uri>model://pioneer3at/meshes/chassis.dae</uri>
+              <scale>12 4 4</scale>
+              <pose>0 0 7</pose>
+            </mesh>
           </geometry>
         </visual>
         <collision name='collision'>
           <geometry>
             <box>
-              <size>2.01142 1 0.568726</size>
+              <size>1.01142 1 0.568726</size>
             </box>
           </geometry>
         </collision>
       </link>
 
-      <link name='left_wheel'>
-        <pose>0.554283 0.625029 -0.025 -1.5707 0 0</pose>
+      <link name='front_left_wheel'>
+        <pose>0.994283 0.625029 -0.025 -1.5707 0 0</pose>
         <inertial>
           <mass>2</mass>
           <inertia>
@@ -67,20 +78,19 @@
             <izz>0.125</izz>
           </inertia>
         </inertial>
-        <visual name="visual">
+        <visual name='visual'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <mesh>
+              <uri>model://pioneer3at/meshes/wheel.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
           </geometry>
         </visual>
-        <collision name="collision">
+        <collision name='collision'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <sphere>
+              <radius>0.3</radius>
+            </sphere>
           </geometry>
           <surface>
             <friction>
@@ -105,8 +115,8 @@
         </collision>
       </link>
 
-      <link name='right_wheel'>
-        <pose>0.554282 -0.625029 -0.025 -1.5707 0 0</pose>
+      <link name='front_right_wheel'>
+        <pose>0.994282 -0.625029 -0.025 -1.5707 0 0</pose>
         <inertial>
           <mass>2</mass>
           <inertia>
@@ -118,20 +128,19 @@
             <izz>0.125</izz>
           </inertia>
         </inertial>
-        <visual name="visual">
+        <visual name='visual'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <mesh>
+              <uri>model://pioneer3at/meshes/wheel.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
           </geometry>
         </visual>
-        <collision name="collision">
+        <collision name='collision'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <sphere>
+              <radius>0.3</radius>
+            </sphere>
           </geometry>
           <surface>
             <friction>
@@ -154,14 +163,10 @@
             </contact>
           </surface>
         </collision>
-      </link>
-        <!---
-         <param1: Adjusts the wheel alignment parallel to the body>
-         <param2: Adjusts the distance between the chassis and the wheel>
-         <param3: Adjusts the height of the wheel link>
-        -->
-      <link name='right_rear_wheel'>
-        <pose>-0.954282 -0.625029 0.025 -1.5707 0 0</pose>
+       </link>
+
+       <link name='middle_left_wheel'>
+        <pose>-0.137138 0.625029 -0.025 -1.5707 0 0</pose>
         <inertial>
           <mass>2</mass>
           <inertia>
@@ -173,20 +178,19 @@
             <izz>0.125</izz>
           </inertia>
         </inertial>
-        <visual name="visual">
+        <visual name='visual'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <mesh>
+              <uri>model://pioneer3at/meshes/wheel.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
           </geometry>
         </visual>
-        <collision name="collision">
+        <collision name='collision'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <sphere>
+              <radius>0.3</radius>
+            </sphere>
           </geometry>
           <surface>
             <friction>
@@ -211,8 +215,8 @@
         </collision>
       </link>
 
-      <link name='left_rear_wheel'>
-        <pose>-0.954282 0.625029 -0.025 -1.5707 0 0</pose>
+      <link name='middle_right_wheel'>
+        <pose>-0.137138 -0.625029 -0.025 -1.5707 0 0</pose>
         <inertial>
           <mass>2</mass>
           <inertia>
@@ -224,20 +228,119 @@
             <izz>0.125</izz>
           </inertia>
         </inertial>
-        <visual name="visual">
+        <visual name='visual'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <mesh>
+              <uri>model://pioneer3at/meshes/wheel.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
           </geometry>
         </visual>
-        <collision name="collision">
+        <collision name='collision'>
           <geometry>
-            <cylinder>
-              <radius>.4</radius>
-              <length>.1</length>
-            </cylinder>
+            <sphere>
+              <radius>0.3</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+
+      <link name='back_left_wheel'>
+        <pose>-1.357138 0.625029 -0.025 -1.5707 0 0</pose>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://pioneer3at/meshes/wheel.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.3</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+
+      <link name='back_right_wheel'>
+        <pose>-1.357138 -0.625029 -0.025 -1.5707 0 0</pose>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://pioneer3at/meshes/wheel.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.3</radius>
+            </sphere>
           </geometry>
           <surface>
             <friction>
@@ -332,9 +435,9 @@
         </sensor>
             </link>
 
-      <joint name='left_wheel_joint' type='revolute'>
+      <joint name='front_left_wheel_joint' type='revolute'>
         <parent>chassis</parent>
-        <child>left_wheel</child>
+        <child>front_left_wheel</child>
         <axis>
           <xyz>0 0 1</xyz>
           <limit>
@@ -344,9 +447,9 @@
         </axis>
       </joint>
 
-      <joint name='right_wheel_joint' type='revolute'>
+      <joint name='front_right_wheel_joint' type='revolute'>
         <parent>chassis</parent>
-        <child>right_wheel</child>
+        <child>front_right_wheel</child>
         <axis>
           <xyz>0 0 1</xyz>
           <limit>
@@ -356,50 +459,71 @@
         </axis>
       </joint>
 
-      <!-- <joint type="fixed" name="laser_joint">
-        <child>laser_link</child>
-          <parent>chassis</parent>
-      </joint>  -->
-
-      <joint type="revolute" name="right_wheel_hinge">
-        <pose>0 0 0.03 0 0 0</pose>
-        <child>right_rear_wheel</child>
+      <joint name='middle_left_wheel_joint' type='revolute'>
         <parent>chassis</parent>
-        <axis>
-          <xyz>0 0 3</xyz>
+        <child>middle_left_wheel</child>
+          <mass>1</mass>
+        <axis>0 0 1/xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
         </axis>
-        <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
-        </limit>
       </joint>
 
-      <joint type="revolute" name="left_wheel_hinge">
-        <pose>0 0 0.03 0 0 0</pose>
-        <child>left_rear_wheel</child>
+      <joint name='middle_right_wheel_joint' type='revolute'>
         <parent>chassis</parent>
+        <child>middle_right_wheel</child>
         <axis>
-          <xyz>0 0 3</xyz>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
         </axis>
-        <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
-        </limit>
       </joint>
+
+      <joint name='back_left_wheel_joint' type='revolute'>
+        <parent>chassis</parent>
+        <child>back_left_wheel</child>
+          <mass>1</mass>
+        <axis>0 0 1/xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name='back_right_wheel_joint' type='revolute'>
+        <parent>chassis</parent>
+        <child>back_right_wheel</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+
 
       <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
 
         <ros>
           <namespace>/demo</namespace>
-          <argument>cmd_vel:=cmd_demo</argument>
-          <argument>odom:=odom_demo</argument>
+          <remapping>cmd_vel:=cmd_demo</remapping>
+          <remapping>odom:=odom_demo</remapping>
         </ros>
 
         <!-- wheels -->
-        <!-- <left_joint>left_wheel_joint</left_joint> -->
-        <!-- <right_joint>right_wheel_joint</right_joint> -->
-        <right_rear_joint>right_wheel_hinge</right_rear_joint>
-        <left_rear_joint>left_wheel_hinge</left_rear_joint>
+        <left_joint>front_left_wheel_joint</left_joint>
+        <right_joint>front_right_wheel_joint</right_joint>
+        <mid_left_joint>middle_left_wheel_joint</mid_left_joint>
+        <mid_right_joint>middle_right_wheel_joint</mid_right_joint>
+        <back_left_joint>back_left_wheel_joint</back_left_joint>
+        <back_right_joint>back_right_wheel_joint</back_right_joint>
+
 
         <!-- kinematics -->
         <wheel_separation>1.25</wheel_separation>
