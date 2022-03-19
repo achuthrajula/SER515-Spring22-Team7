@@ -11,25 +11,29 @@ def main():
             """
             Choose a functionality to proceed: \n
             1. Launch testing ground
-            2. Rover Controller
-            3. ROS Setup
-            4. Launch ROS 
-            5. Exit
+            2. Launch Maze
+            3. Rover Controller
+            4. ROS Setup
+            5. Launch ROS 
+            6. Exit
             """
         )
         if user_input == '1':
             launch = TestDrive()
             launch.launch()
         elif user_input == '2':
+            launch = TestDrive()
+            launch.generateMaze()
+        elif user_input == '3':
             control = Controller()
             control.controller()
-        elif user_input == '3':
+        elif user_input == '4':
             setup = Setup()
             setup.setup()
-        elif user_input == '4':
+        elif user_input == '5':
             launch = Launcher()
             launch.launch()
-        elif user_input == '5':
+        elif user_input == '6':
             exit(0)
 
 
