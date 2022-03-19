@@ -1,0 +1,1 @@
+from ezRos.test_installations.tests import Test

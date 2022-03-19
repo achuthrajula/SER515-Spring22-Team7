@@ -275,7 +275,7 @@
         </inertial>
         <!-- Position is towards the front of the robot -->
         <!-- Laser finder is mounted on top -->
-        <pose>0.15 0 0.50 0 0 0</pose>
+        <pose>0.7 0 0.5 0 0.15 0</pose>
         
         <!-- Add a mesh to make it more visually appealing -->
         <visual name="visual">
