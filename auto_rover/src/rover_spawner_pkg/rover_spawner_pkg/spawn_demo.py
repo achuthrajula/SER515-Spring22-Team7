@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+"""
+ROS 2 node to spawn a mobile robot inside a warehouse.
+
+Author:
+  - Addison Sears-Collins
+  - https://automaticaddison.com
+"""
+>>>>>>> 3b343453e94c795414e03f11b118b1766d61ceff
 import os # Operating system library
 import sys # Python runtime environment library
 import rclpy # ROS Client Library for Python
