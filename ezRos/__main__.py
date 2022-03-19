@@ -1,8 +1,9 @@
+from cgitb import handler
 from ezRos.controller import Controller
 from ezRos.test_environment import TestDrive
 from ezRos.launch import Launcher
-from ezRos.ros_setup import Setup
-
+from ezRos.environment_setup import Setup
+from ezRos.test_installations import Test
 
 def main():
     user_input = 0
@@ -11,29 +12,33 @@ def main():
             """
             Choose a functionality to proceed: \n
             1. Launch testing ground
-            2. Launch Maze
-            3. Rover Controller
-            4. ROS Setup
+            2. Rover Controller
+            3. Environment Setup
+            4. Test Installations
             5. Launch ROS 
-            6. Exit
+            6. Generate Maze
+            7. Exit
             """
         )
         if user_input == '1':
             launch = TestDrive()
             launch.launch()
         elif user_input == '2':
-            launch = TestDrive()
-            launch.generateMaze()
-        elif user_input == '3':
             control = Controller()
             control.controller()
-        elif user_input == '4':
+        elif user_input == '3':
             setup = Setup()
             setup.setup()
+        elif user_input == '4':
+            test = Test()
+            test.test()
         elif user_input == '5':
             launch = Launcher()
             launch.launch()
         elif user_input == '6':
+            launch = TestDrive()
+            launch.generateMaze()
+        elif user_input == '7':
             exit(0)
 
 

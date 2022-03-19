@@ -10,7 +10,7 @@ class Controller:
         input_command = 0
         sys.path.append(os.getcwd())
 
-        while input_command != "7":
+        while input_command != "x":
             input_command = input(
                 """Commands: \n
                 K to start the rover
@@ -27,7 +27,7 @@ class Controller:
                     "ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 1.0}}' -1")
                 speed_input = 1
                 user_input = ''
-                while user_input != 'x':
+                while user_input != 'c':
                     user_input = input()
                     if (user_input == "q"):
                         speed_input += 1
@@ -44,7 +44,7 @@ class Controller:
                     "ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: -1.0}}' -1")
                 speed_input = 1
                 user_input = ''
-                while user_input != 'x':
+                while user_input != 'c':
                     user_input = input()
                     if (user_input == "q"):
                         speed_input += 1
