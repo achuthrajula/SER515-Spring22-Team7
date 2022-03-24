@@ -14,6 +14,8 @@ class TestDrive:
             Enter the sensors you want mounted: \n
             0. No sensors
             1. LASER
+            2. Camera
+            3. Camera and LASER
             """
         )
 
