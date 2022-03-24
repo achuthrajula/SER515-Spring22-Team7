@@ -1,5 +1,4 @@
 import os
-import sys
 
 class Controller:
 
@@ -8,7 +7,6 @@ class Controller:
 
     def controller(self):
         input_command = 0
-        sys.path.append(os.getcwd())
 
         while input_command != "x":
             input_command = input(

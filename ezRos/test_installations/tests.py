@@ -1,5 +1,5 @@
-import sys
 import os
+from _root_path import ROOT_DIRECTORY
 
 class Test:
 
@@ -8,7 +8,6 @@ class Test:
 
     def test(self):
         input_command = 0
-        sys.path.append(os.getcwd())
         
         while input_command != "x":
             input_command = input(
@@ -23,16 +22,16 @@ class Test:
             )
 
             if input_command == "1":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/python/test_python.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/python/test_python.sh")
 
             elif input_command == "2":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/ros2/test_ros2.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/ros2/test_ros2.sh")
 
             elif input_command == "3":
                 os.system(f"gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world")
 
             elif input_command == "4":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/slam/slam_test.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/slam/slam_test.sh")
 
             elif input_command == "x":
                 return

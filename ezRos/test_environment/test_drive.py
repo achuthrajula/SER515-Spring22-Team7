@@ -1,5 +1,5 @@
 import os
-import sys
+from _root_path import ROOT_DIRECTORY
 
 class TestDrive:
 
@@ -16,10 +16,9 @@ class TestDrive:
             1. LASER
             """
         )
-        sys.path.append(os.getcwd())
 
-        #os.system(f"gazebo --verbose {os.getcwd()}/Gazebo-Worlds/{wheel_input}x_alpha_gazebo_environment.world")
-        os.system(f"gazebo --verbose {os.getcwd()}/Gazebo-Worlds/{wheel_input}_{sensor_input}_x_alpha_gazebo_environment.world")
+        #os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/{wheel_input}x_alpha_gazebo_environment.world")
+        os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/{wheel_input}_{sensor_input}_x_alpha_gazebo_environment.world")
 
     def generateMaze(self):
-        os.system(f"gazebo --verbose {os.getcwd()}/Gazebo-Worlds/Maze.world")
+        os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/Maze.world")
