@@ -4,6 +4,7 @@ from ezRos.test_environment import TestDrive
 from ezRos.launch import Launcher
 from ezRos.environment_setup import Setup
 from ezRos.test_installations import Test
+from ezRos.gui import GUI
 
 def main():
     try:
@@ -18,7 +19,8 @@ def main():
                 4. Test Installations
                 5. Launch ROS 
                 6. Generate Maze
-                7. Exit
+                7. GUI
+                8. Exit
                 """
             )
             if user_input == '1':
@@ -40,6 +42,9 @@ def main():
                 launch = TestDrive()
                 launch.generateMaze()
             elif user_input == '7':
+                launch = GUI()
+                launch.gui()
+            elif user_input == '8':
                 exit(0)
     except KeyboardInterrupt:
         try:
