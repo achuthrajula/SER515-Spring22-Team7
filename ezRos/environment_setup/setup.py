@@ -1,5 +1,5 @@
 import os
-import sys
+from _root_path import ROOT_DIRECTORY
 
 class Setup:
 
@@ -8,7 +8,6 @@ class Setup:
 
     def setup(self):
         input_command = 0
-        sys.path.append(os.getcwd())
         
         while input_command != "x":
             input_command = input(
@@ -24,19 +23,19 @@ class Setup:
             )
 
             if input_command == "1":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/python/python.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/python/python.sh")
 
             elif input_command == "2":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/ros2/ros2.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/ros2/ros2.sh")
 
             elif input_command == "3":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/gazebo/gazebo.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/gazebo/gazebo.sh")
 
             elif input_command == "4":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/slam/SLAM.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/slam/SLAM.sh")
 
             elif input_command == "5":
-                os.system(f"sudo bash {os.getcwd()}/Installation-Scripts/rviz2/rviz2.sh")
+                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/rviz2/rviz2.sh")
 
             elif input_command == "x":
                 return
