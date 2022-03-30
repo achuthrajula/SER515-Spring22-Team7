@@ -3,12 +3,22 @@ from tkinter import messagebox
 
 class GUI():
     def __init__(self) -> None:
-        pass
+        self.sensor_input= 0
 
     def gui(self):
 
         def about():
-            messagebox.showinfo('ezRos', 'Python Guides aims at providing best practical tutorials')
+            messagebox.showinfo('ezRos', '  An object oriented approach to make ROS2 implementation easier')
+
+        
+        def laser():
+            self.sensor_input = 1
+        
+        def camera():
+            self.sensor_input = 2
+
+        def camlaser():
+            self.sensor_input = 3
 
         window =Tk()
         window.title("ezRos")
@@ -36,6 +46,13 @@ class GUI():
         help.add_command(label="About", command=about)  
         menubar.add_cascade(label="Help", menu=help)  
             
+        sensors = Menu(menubar, tearoff=0)
+        sensors.add_command(label="No sensors")
+        sensors.add_command(label="Laser",command=laser)
+        sensors.add_command(label="Camera",command=camera)
+        sensors.add_command(label="Camera and Laser",command=camlaser)
+        menubar.add_cascade(label = "Sensors",menu = sensors)
+
         window.config(menu=menubar)
         window.mainloop()
 
