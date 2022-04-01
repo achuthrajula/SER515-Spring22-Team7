@@ -1,28 +1,36 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter.ttk import *
+import os
+from _root_path import ROOT_DIRECTORY
+
 
 class GUI():
+    
     def __init__(self) -> None:
-        self.sensor_input= 0
+        pass
 
     def gui(self):
+        window =Tk()
+        window.title("ezRos")
+        window.geometry("300x300")
+
 
         def about():
             messagebox.showinfo('ezRos', '  An object oriented approach to make ROS2 implementation easier')
 
-        
+        def nolaser():
+            os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/4_0_x_alpha_gazebo_environment.world")
+
         def laser():
-            self.sensor_input = 1
+            os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/4_1_x_alpha_gazebo_environment.world")
         
         def camera():
-            self.sensor_input = 2
+            os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/4_2_x_alpha_gazebo_environment.world")
 
         def camlaser():
-            self.sensor_input = 3
+            os.system(f"gazebo --verbose {ROOT_DIRECTORY}/Gazebo-Worlds/4_3_x_alpha_gazebo_environment.world")
 
-        window =Tk()
-        window.title("ezRos")
-        window.geometry("300x300")
 
         menubar = Menu(window, background='#0b91a3', foreground='black', activebackground='#10adc2', activeforeground='white')  
         file = Menu(menubar)  
@@ -47,7 +55,7 @@ class GUI():
         menubar.add_cascade(label="Help", menu=help)  
             
         sensors = Menu(menubar, tearoff=0)
-        sensors.add_command(label="No sensors")
+        sensors.add_command(label="No sensors",command=nolaser)
         sensors.add_command(label="Laser",command=laser)
         sensors.add_command(label="Camera",command=camera)
         sensors.add_command(label="Camera and Laser",command=camlaser)
