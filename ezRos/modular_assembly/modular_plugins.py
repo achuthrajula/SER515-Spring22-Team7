@@ -70,11 +70,11 @@ plugin_generator_4x = """<plugin name='skid_steer_drive' filename='libgazebo_ros
         </plugin>"""
 
 
-def generate_plugins(num_wheels: int):
-
-    if num_wheels == 4:
+def generate_plugins(num_wheels):
+    print(num_wheels, type(num_wheels))
+    if num_wheels == '4':
         return plugin_generator_4x
-    elif num_wheels == 2:
+    elif num_wheels == '2':
         return plugin_generator_2x
     else:
         raise ValueError("Wheels must be either 2 or 4")

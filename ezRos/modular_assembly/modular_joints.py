@@ -30,12 +30,12 @@ joint_generator_2x = {
 }
 
 
-def generate_joints(joint_count: int):
+def generate_joints(joint_count):
+    iterator = {}
     joints = []
-
-    if joint_count == 4:
+    if joint_count == '4':
         iterator = joint_generator_4x
-    elif joint_count == 2:
+    elif joint_count == '2':
         iterator = joint_generator_2x
 
     for key, value in iterator.items():

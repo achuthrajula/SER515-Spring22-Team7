@@ -1,4 +1,3 @@
-
 wheel_generator_4x = {
     'left_wheel_0': {
         'name': 'left_wheel_0',
@@ -36,12 +35,12 @@ wheel_generator_2x = {
 }
 
 
-def generate_wheels(wheel_count: int):
+def generate_wheels(wheel_count):
+    iterator = {}
     wheels = []
-
-    if wheel_count == 4:
+    if wheel_count == '4':
         iterator = wheel_generator_4x
-    elif wheel_count == 2:
+    elif wheel_count == '2':
         iterator = wheel_generator_2x
 
     for key, value in iterator.items():
@@ -59,13 +58,13 @@ def generate_wheels(wheel_count: int):
                     </inertia>
                 </inertial>
                 <visual name='visual'>
-                    <material>
-                        <!-- Wheel material -->
-                        <ambient>0.1 0.1 0.1 1</ambient>
-                        <diffuse>0.1 0.1 0.2 1</diffuse>
-                        <specular>0 0 0 0</specular>
-                        <emissive>0 0 0 1</emissive>
-                    </material> <!-- End wheel material -->
+                <material>
+                    <!-- Wheel material -->
+                    <ambient>0.1 0.1 0.1 1</ambient>
+                    <diffuse>0.1 0.1 0.2 1</diffuse>
+                    <specular>0 0 0 0</specular>
+                    <emissive>0 0 0 1</emissive>
+                </material> <!-- End wheel material -->
                     <geometry>
                     <sphere>
                         <radius>{value['radius']}</radius>
