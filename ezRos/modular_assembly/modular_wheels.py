@@ -1,3 +1,36 @@
+wheel_generator_6x = {
+    'left_wheel_0': {
+        'name': 'left_wheel_0',
+        'pose': '0.994283 0.625029 -0.025 -1.5707 0 0',
+        'radius': 0.3,
+    },
+    'right_wheel_0': {
+        'name': 'right_wheel_0',
+        'pose': '0.994282 -0.625029 -0.025 -1.5707 0 0',
+        'radius': 0.3,
+    },
+    'left_wheel_1': {
+        'name': 'left_wheel_1',
+        'pose': '-0.137138 0.625029 -0.025 -1.5707 0 0',
+        'radius': 0.3,
+    },
+    'right_wheel_1': {
+        'name': 'right_wheel_1',
+        'pose': '-0.137138 -0.625029 -0.025 -1.5707 0 0',
+        'radius': 0.3,
+    },
+    'left_wheel_2': {
+        'name': 'left_wheel_2',
+        'pose': '-1.357138 0.625029 -0.025 -1.5707 0 0',
+        'radius': 0.3,
+    },
+    'right_wheel_2': {
+        'name': 'right_wheel_2',
+        'pose': '-1.357138 -0.625029 -0.025 -1.5707 0 0',
+        'radius': 0.3,
+    },
+}
+
 wheel_generator_4x = {
     'left_wheel_0': {
         'name': 'left_wheel_0',
@@ -38,7 +71,9 @@ wheel_generator_2x = {
 def generate_wheels(wheel_count):
     iterator = {}
     wheels = []
-    if wheel_count == '4':
+    if wheel_count == '6':
+        iterator = wheel_generator_6x
+    elif wheel_count == '4':
         iterator = wheel_generator_4x
     elif wheel_count == '2':
         iterator = wheel_generator_2x
