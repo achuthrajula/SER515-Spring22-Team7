@@ -2,3 +2,4 @@ from ezRos.modular_assembly.modular_joints import generate_joints
 from ezRos.modular_assembly.modular_plugins import generate_plugins
 from ezRos.modular_assembly.modular_wheels import generate_wheels
 from ezRos.modular_assembly.modular_chassis import generate_chassis
+from ezRos.modular_assembly.modular_sensors import generate_sensors
