@@ -33,7 +33,9 @@ class Assembler:
                 for wheel in wheels:
                     wheel_root = bs(wheel, "lxml-xml")
                     root.model.append(copy(wheel_root.link))
-                generate_sensors()
+                sensors, sensor_input = generate_sensors()
+                sensors_link = bs(sensors, "lxml-xml")
+                root.model.append(copy(sensors_link))
                 for joint in joints:
                     joint_root = bs(joint, "lxml")
                     root.model.append(copy(joint_root.joint))
