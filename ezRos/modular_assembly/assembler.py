@@ -1,6 +1,6 @@
 import os
 from bs4 import BeautifulSoup as bs
-from ezRos.modular_assembly.utils import generate_joints, generate_plugins, generate_wheels, generate_chassis
+from ezRos.modular_assembly.utils import generate_joints, generate_plugins, generate_wheels, generate_chassis, generate_sensors, generate_sensorjoints
 
 from copy import copy
 from _root_path import ROOT_DIRECTORY
@@ -26,16 +26,24 @@ class Assembler:
                 chassis = generate_chassis(val)
                 wheels = generate_wheels(val)
                 joints = generate_joints(val)
-                print(joints)
                 plugin = generate_plugins(val)
                 chassis_root = bs(chassis, "lxml-xml")
                 root.model.append(copy(chassis_root.link))
                 for wheel in wheels:
                     wheel_root = bs(wheel, "lxml-xml")
                     root.model.append(copy(wheel_root.link))
+                sensors, sensor_input = generate_sensors()
+                for sensor in sensors:
+                    sensor_root = bs(sensor, "lxml-xml")
+                    root.model.append(copy(sensor_root))
                 for joint in joints:
                     joint_root = bs(joint, "lxml")
                     root.model.append(copy(joint_root.joint))
+                
+                sensorjoints = generate_sensorjoints(sensor_input)
+                for sensorjoint in sensorjoints:
+                    sensorjoint_root = bs(sensorjoint, "lxml-xml")
+                    root.model.append(copy(sensorjoint_root))
                 plugin_root = bs(plugin, "lxml")
                 root.model.append(copy(plugin_root.plugin))
             with open(f'{ROOT_DIRECTORY}/Rover-Workshop/generate.xml', 'w') as f:
