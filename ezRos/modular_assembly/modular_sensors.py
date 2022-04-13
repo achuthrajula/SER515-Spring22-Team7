@@ -143,7 +143,7 @@ camera = """<link name="camera_link">
   </link>"""
 
 
-def generate_wheels(wheel_count):
+def generate_sensors():
     sensor_input = input("""
         Enter the sensors for the rover\n
         [0] No Sensors
@@ -151,11 +151,14 @@ def generate_wheels(wheel_count):
         [2] Camera
         [3] Laser and Camera
         """)
+    sensorsList = []
     if sensor_input == '0':
-        return "", sensor_input
+        sensorsList.append("")
     elif sensor_input == '1':
-        return laser, sensor_input
+        sensorsList.append(laser)
     elif sensor_input == '2':
-        return camera, sensor_input
+        sensorsList.append(camera)
     elif sensor_input == '3':
-        return laser + camera, sensor_input
+        sensorsList.append(laser)
+        sensorsList.append(camera)
+    return sensorsList, sensor_input
