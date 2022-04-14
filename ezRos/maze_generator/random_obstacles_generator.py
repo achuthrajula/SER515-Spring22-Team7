@@ -10,12 +10,14 @@ def helper(itr):
     return l
 
 
-def random_number_generator_with_minimum_distance(itr):
+def random_number_generator_with_minimum_distance(distance, maze_spread, itr):
+    try:
+        return [distance*i + x for i, x in enumerate(random.sample(range(-maze_spread, maze_spread), itr))]
+    except Exception:
+        return 'error'
 
-    return [1*i + x for i, x in enumerate(random.sample(range(-25, 25), itr))]
 
-
-print(random_number_generator_with_minimum_distance(20))
+print(random_number_generator_with_minimum_distance(1, 25, 100))
 
 
 def random_number_generator(itr):
@@ -26,30 +28,32 @@ def random_number_generator(itr):
     return(l)
 
 
-def random_obstacle_generator(obstacle_count):
+def random_obstacle_generator(distance, maze_spread, obstacle_count):
     obstacle_poses = {}
     # Sets x co-ordinates of the obstacle
     obstacle_poses["x"] = random_number_generator_with_minimum_distance(
-        int(obstacle_count))
+        int(distance), int(maze_spread), int(obstacle_count))
     # Sets y co-ordinates of the obstacle
     obstacle_poses["y"] = random_number_generator_with_minimum_distance(
-        int(obstacle_count))
+        int(distance), int(maze_spread), int(obstacle_count))
     # Sets rotation angle along z axis
     obstacle_poses["z"] = random_number_generator(int(obstacle_count))
 
-    print(obstacle_poses)
     return obstacle_poses
 
 
-def generate_obstacles(obstacle_count):
+def generate_obstacles(distance, maze_spread, obstacle_count):
     iterator = {}
     obstacles = []
-    obstacles_poses = random_obstacle_generator(obstacle_count)
+    obstacles_poses = random_obstacle_generator(
+        distance, maze_spread, obstacle_count)
     obstacles_x = obstacles_poses['x']
+    if obstacles_x == 'error':
+        print('The given obstacle count is too high for the given area, please try again after altering the parameters')
+        return 'error'
     obstacles_y = obstacles_poses['y']
     obstacles_z = obstacles_poses['z']
 
-    print(obstacles_x, obstacles_y, obstacles_z)
     scam = [0, 1.8]
 
     for i in range(len(obstacles_x)):

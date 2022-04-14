@@ -6,7 +6,6 @@ from ezRos.launch import Launcher
 from ezRos.environment_setup import Setup
 from ezRos.test_installations import Test
 from ezRos.gui import GUI
-from ezRos.maze_generator import MazeGenerator
 
 
 def main():
@@ -42,10 +41,8 @@ def main():
                 launch = Launcher()
                 launch.launch()
             elif user_input == '6':
-                generate = MazeGenerator()
-                count = input(
-                    'Enter the number of obstacles to be added to the world\n')
-                generate.generate(count)
+                launch = TestDrive()
+                launch.generateMaze()
             elif user_input == '7':
                 launch = GUI()
                 launch.gui()
