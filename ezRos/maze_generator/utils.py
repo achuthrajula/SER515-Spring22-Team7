@@ -1,0 +1,2 @@
+
+from ezRos.maze_generator.random_obstacles_generator import generate_obstacles
