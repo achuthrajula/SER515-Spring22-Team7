@@ -82,8 +82,8 @@ sensor_generator = {
   'laser': {
     'id': laser,
     'name':'laser_link',
-    'pose': '0.7 0 0.62 0 0 0',
-    #'pose_back': '-1 0 0.62 0 0 0',
+    'pose_front': '0.7 0 0.62 0 0 0',
+    'pose_back': '-1 0 0.62 0 0 0',
     'collision_pose' : '0 0 -0.0145 0 0 0',
     'collision_size' : '0.05 0.05 0.041',
     'visual_geometry': """
@@ -96,8 +96,8 @@ sensor_generator = {
   'camera': {
     'id':camera,
     'name': 'camera_link',
-    'pose': '0.6 0.2 0.68 0 0 0',
-    #'pose_back': '-1 0.2 0.68 0 0 0',
+    'pose_front': '0.6 0.2 0.68 0 0 0',
+    'pose_back': '-1 0.2 0.68 0 0 0',
     'collision_pose' : '0 0 0 0 0 0',
     'collision_size' : '0.15 0.3 0.15',
     'visual_geometry': """
@@ -129,7 +129,13 @@ def generate_sensors(req_sensors):
             [1] Front
             [2] Back
             """)
-      
+      sensor_position_data = ""
+      if sensor_position_input == '1':
+        sensor_position_data = data['pose_front']
+      elif sensor_position_input == '2':
+        sensor_position_data = data['pose_back']
+      else:
+        sensor_position_data = data['pose_front']
       joint = f"""
       <link name='{data['name']}'>
     <collision name="collision-base">
@@ -140,7 +146,7 @@ def generate_sensors(req_sensors):
             </box>
           </geometry>
         </collision>
-        <pose>{data['pose']}</pose>
+        <pose>{sensor_position_data}</pose>
         <visual name="visual">
           <pose>0 0 0 0 0 0</pose>
           <geometry>
