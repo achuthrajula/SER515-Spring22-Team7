@@ -10,6 +10,6 @@ sudo apt install ros-foxy-cartographer-ros
 
 sudo apt install ros-foxy-navigation2
 
-sudo aput ros-foxy-nav2-bringup
+sudo apt ros-foxy-nav2-bringup
 
 echo "Successfully installed SLAM in this system. Make sure to use our test script to simulate SLAM."

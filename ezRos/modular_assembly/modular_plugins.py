@@ -4,6 +4,7 @@ plugin_boiler_plate = """<ros>
                     <remapping>odom:=odom_demo</remapping>
                 </ros>
 
+                <command_topic>cmd_vel</command_topic>
 
                 <!-- limits -->
                 <max_wheel_torque>20</max_wheel_torque>
