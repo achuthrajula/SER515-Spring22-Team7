@@ -13,6 +13,7 @@ class TestDrive:
         [2] 2x wheels
         [4] 4x wheels
         [6] 6x wheels
+        [8] 8x wheels
         """)
 
         Assembler().assemble(wheel_input)

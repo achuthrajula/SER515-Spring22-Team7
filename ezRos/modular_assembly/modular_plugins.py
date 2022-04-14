@@ -65,9 +65,28 @@ plugin_generator_6x = """<plugin name='diff_drive' filename='libgazebo_ros_diff_
         <wheel_separation>1.25</wheel_separation>
         <wheel_diameter>0.6</wheel_diameter>"""
 
+plugin_generator_8x = """<plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+              
+        <!-- wheels -->
+        <left_joint>left_wheel_joint_0</left_joint>
+        <right_joint>right_wheel_joint_0</right_joint>
+        <mid1_left_joint>left_wheel_joint_1</mid1_left_joint>
+        <mid1_right_joint>right_wheel_joint_1</mid1_right_joint>
+        <mid2_left_joint>left_wheel_joint_2</mid2_left_joint>
+        <mid2_right_joint>right_wheel_joint_2</mid2_right_joint>
+        <back_left_joint>left_wheel_joint_3</back_left_joint>
+        <back_right_joint>right_wheel_joint_3</back_right_joint>
+
+
+        <!-- kinematics -->
+        <wheel_separation>1.25</wheel_separation>
+        <wheel_diameter>0.6</wheel_diameter>"""
+
 
 def generate_plugins(num_wheels):
-    if num_wheels == '6':
+    if num_wheels == '8':
+        return plugin_generator_8x + plugin_boiler_plate
+    elif num_wheels == '6':
         return plugin_generator_6x + plugin_boiler_plate
     elif num_wheels == '4':
         return plugin_generator_4x + plugin_boiler_plate

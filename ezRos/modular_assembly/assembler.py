@@ -12,7 +12,7 @@ class Assembler:
         pass
 
     def assemble(self, val):
-        if val == '2' or val == '4' or val == '6':
+        if val == '2' or val == '4' or val == '6' or val == '8':
             print(val)
             content = []
             # Read the XML file
