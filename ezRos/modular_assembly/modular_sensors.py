@@ -83,6 +83,7 @@ sensor_generator = {
     'id': laser,
     'name':'laser_link',
     'pose': '0.7 0 0.62 0 0 0',
+    #'pose_back': '-1 0 0.62 0 0 0',
     'collision_pose' : '0 0 -0.0145 0 0 0',
     'collision_size' : '0.05 0.05 0.041',
     'visual_geometry': """
@@ -96,6 +97,7 @@ sensor_generator = {
     'id':camera,
     'name': 'camera_link',
     'pose': '0.6 0.2 0.68 0 0 0',
+    #'pose_back': '-1 0.2 0.68 0 0 0',
     'collision_pose' : '0 0 0 0 0 0',
     'collision_size' : '0.15 0.3 0.15',
     'visual_geometry': """
@@ -122,6 +124,12 @@ def generate_sensors(req_sensors):
 
     for value in iterator:
       data = sensor_generator[value]
+      sensor_position_input =  input(f"""
+            Where would you like to place {value} sensor:\n
+            [1] Front
+            [2] Back
+            """)
+      
       joint = f"""
       <link name='{data['name']}'>
     <collision name="collision-base">
