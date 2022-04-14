@@ -16,4 +16,16 @@ class TestDrive:
         [8] 8x wheels
         """)
 
-        Assembler().assemble(wheel_input)
+        available_sensors = ['laser','camera']
+        required_sensors = []
+        for sensor in available_sensors:
+            sensor_input=  input(f"""
+            Do you need the {sensor} sensor\n
+
+            [0] No
+            [1] Yes
+            """)
+            if(sensor_input=='1'):
+                required_sensors.append(sensor)
+
+        Assembler().assemble(wheel_input, required_sensors)

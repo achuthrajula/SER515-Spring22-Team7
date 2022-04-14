@@ -11,7 +11,7 @@ class Assembler:
     def __init__(self) -> None:
         pass
 
-    def assemble(self, val):
+    def assemble(self, val, sensor_val):
         if val == '2' or val == '4' or val == '6' or val == '8':
             print(val)
             content = []
@@ -32,7 +32,7 @@ class Assembler:
                 for wheel in wheels:
                     wheel_root = bs(wheel, "lxml-xml")
                     root.model.append(copy(wheel_root.link))
-                sensors, sensor_input = generate_sensors()
+                sensors = generate_sensors(sensor_val)
                 for sensor in sensors:
                     sensor_root = bs(sensor, "lxml-xml")
                     root.model.append(copy(sensor_root))
@@ -40,7 +40,7 @@ class Assembler:
                     joint_root = bs(joint, "lxml")
                     root.model.append(copy(joint_root.joint))
                 
-                sensorjoints = generate_sensorjoints(sensor_input)
+                sensorjoints = generate_sensorjoints(sensor_val)
                 for sensorjoint in sensorjoints:
                     sensorjoint_root = bs(sensorjoint, "lxml-xml")
                     root.model.append(copy(sensorjoint_root))
