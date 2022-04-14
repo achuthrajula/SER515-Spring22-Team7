@@ -1,10 +1,12 @@
-import os, sys
+import os
+import sys
 from ezRos.controller import Controller
 from ezRos.test_environment import TestDrive
 from ezRos.launch import Launcher
 from ezRos.environment_setup import Setup
 from ezRos.test_installations import Test
 from ezRos.gui import GUI
+
 
 def main():
     try:
