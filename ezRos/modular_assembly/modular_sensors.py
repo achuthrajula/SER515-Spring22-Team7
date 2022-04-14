@@ -1,31 +1,4 @@
-laser = """<link name="laser_link">
-              <inertial>
-                <!-- Mass of the laser range finder in kg -->
-                <mass>0.1</mass>
-              </inertial>
-              <!-- Position is towards the front of the robot -->
-              <!-- Laser finder is mounted on top -->
-              <pose>0.7 0 0.62 0 0 0</pose>
-              
-              <!-- Add a mesh to make it more visually appealing -->
-              <visual name="visual">
-                <geometry>
-                  <mesh>
-                    <uri>model://hokuyo/meshes/hokuyo.dae</uri>
-                  </mesh>
-                </geometry>
-              </visual>
-              
-              <!-- Collision properties of the base of the laser range finder-->
-              <collision name="collision-base">
-                <pose>0 0 -0.0145 0 0 0</pose>
-                <geometry>
-                  <box>
-                    <size>0.05 0.05 0.041</size>
-                  </box>
-                </geometry>
-              </collision>
-              <!-- Collision properties of the top of the laser range finder-->
+laser = """
               <collision name="collision-top">
                 <pose>0 0 0.0205 0 0 0</pose>
                 <geometry>
@@ -36,7 +9,6 @@ laser = """<link name="laser_link">
                 </geometry>
               </collision>
               
-              <!-- Describes the type and properties of the sensor -->
         <sensor name="laser" type="ray">
           <pose>0.01 0 0.0175 0 -0 0</pose>
                 <ray>
@@ -68,41 +40,9 @@ laser = """<link name="laser_link">
         </sensor>
             </link>"""
 
-camera = """<link name="camera_link">
-  <collision name="collision-base">
-          <pose>0 0 0 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.15 0.15 0.15</size>
-            </box>
-          </geometry>
-        </collision>
-        <pose>0.7 0.3 0.68 0 0 0</pose>
 
-        <visual name="visual-base">
-          <pose>0 0 0 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.15 0.15 0.15</size>
-            </box>
-          </geometry>
-          <material>
-            <name>red</name>
-          </material>
-        </visual>
 
-        <inertial>
-          <mass>1e-5</mass>
-          <pose>0 0 0 0 0 0</pose>
-          <inertia>
-            <ixx>1e-6</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1e-6</iyy>
-            <iyz>0</iyz>
-            <izz>1e-6</izz>
-          </inertia>
-        </inertial>
+camera = """
     <sensor type="camera" name="camera1">
       <update_rate>30.0</update_rate>
       <camera name="head">
@@ -118,9 +58,6 @@ camera = """<link name="camera_link">
         </clip>
         <noise>
           <type>gaussian</type>
-          <!-- Noise is sampled independently per pixel on each frame.
-               That pixel's noise value is added to each of its color
-               channels, which at that point lie in the range [0,1]. -->
           <mean>0.0</mean>
           <stddev>0.007</stddev>
         </noise>
@@ -142,23 +79,72 @@ camera = """<link name="camera_link">
     </sensor>
   </link>"""
 
+sensor_generator = {
+  'laser': {
+    'id': laser,
+    'name':'laser_link',
+    'pose': '0.7 0 0.62 0 0 0',
+    'collision_pose' : '0 0 -0.0145 0 0 0',
+    'collision_size' : '0.05 0.05 0.041',
+    'visual_geometry': """
+            <mesh>
+              <uri>model://hokuyo/meshes/hokuyo.dae</uri>
+            </mesh>
+    """,
+    'mass': '0.1',
+    },
+  'camera': {
+    'id':camera,
+    'name': 'camera_link',
+    'pose': '0.6 0.2 0.68 0 0 0',
+    'collision_pose' : '0 0 0 0 0 0',
+    'collision_size' : '0.15 0.3 0.15',
+    'visual_geometry': """
+            <box>
+              <size>0.15 0.15 0.15</size>
+            </box>
+    """,
+    'mass': '1e-5',
+    },
+}
 
-def generate_sensors():
-    sensor_input = input("""
-        Enter the sensors for the rover\n
-        [0] No Sensors
-        [1] Laser
-        [2] Camera
-        [3] Laser and Camera
-        """)
+
+def generate_sensors(req_sensors):
+    iterator = []
     sensorsList = []
-    if sensor_input == '0':
+    if not req_sensors:
         sensorsList.append("")
-    elif sensor_input == '1':
-        sensorsList.append(laser)
-    elif sensor_input == '2':
-        sensorsList.append(camera)
-    elif sensor_input == '3':
-        sensorsList.append(laser)
-        sensorsList.append(camera)
-    return sensorsList, sensor_input
+    elif 'laser' in req_sensors and 'camera' not in req_sensors:
+        iterator.append('laser')
+    elif 'laser' not in req_sensors and 'camera' in req_sensors:
+        iterator.append('camera')
+    elif 'laser' in req_sensors and 'camera' in req_sensors:
+        iterator.extend(['laser','camera'])
+
+    for value in iterator:
+      data = sensor_generator[value]
+      joint = f"""
+      <link name='{data['name']}'>
+    <collision name="collision-base">
+          <pose>{data['collision_pose']}</pose>
+          <geometry>
+            <box>
+              <size>{data['collision_size']}</size>
+            </box>
+          </geometry>
+        </collision>
+        <pose>{data['pose']}</pose>
+
+        <visual name="visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            {data['visual_geometry']}
+          </geometry>
+        </visual>
+
+        <inertial>
+          <mass>{data['mass']}</mass>
+        </inertial>
+      """
+      sensorsList.append(joint+data['id'])
+    return sensorsList
