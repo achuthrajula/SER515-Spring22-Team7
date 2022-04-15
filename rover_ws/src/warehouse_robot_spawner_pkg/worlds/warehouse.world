@@ -85,7 +85,7 @@
     </gui>
     <!-- A simple warehouse -->
     <include>
-      <uri>model://my_warehouse</uri>
+      <uri>model://custom_maze</uri>
       <pose>2.4 -2.1 0 0 0 0</pose>
     </include>
   </world>

@@ -23,7 +23,7 @@ setup(
         (os.path.join('share', package_name,'worlds/'), glob('./worlds/*')),
 
         # Path to the warehouse sdf file
-        (os.path.join('share', package_name,'models/small_warehouse/'), glob('./models/small_warehouse/*')),
+        (os.path.join('share', package_name,'models/custom_maze/'), glob('./models/custom_maze/*')),
 
         # Path to the mobile robot sdf file
         (os.path.join('share', package_name,'models/mobile_warehouse_robot/'), glob('./models/mobile_warehouse_robot/*')),
