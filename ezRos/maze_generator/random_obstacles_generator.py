@@ -1,55 +1,41 @@
-import random
+from ezRos.maze_generator.utils import random_number_generator_with_minimum_distance, random_number_generator
 
 
-def random_number_generator_with_minimum_distance(distance, maze_spread, itr):
-    try:
-        return [distance*i + x for i, x in enumerate(random.sample(range(-maze_spread, maze_spread), itr))]
-    except Exception:
-        return 'error'
-
-
-def random_number_generator(itr):
-    l = []
-    for _ in range(itr):
-        l.append(random.randint(0, 1))
-
-    return(l)
-
-
-def random_maze_generator(distance, maze_spread, wall_count):
-    maze_poses = {}
-    # Sets x co-ordinates of the maze
-    maze_poses["x"] = random_number_generator_with_minimum_distance(
-        int(distance), int(maze_spread), int(wall_count))
-    # Sets y co-ordinates of the maze
-    maze_poses["y"] = random_number_generator_with_minimum_distance(
-        int(distance), int(maze_spread), int(wall_count))
+def random_obstacle_generator(distance, maze_spread, obstacle_count):
+    obstacle_poses = {}
+    # Sets x co-ordinates of the obstacle
+    obstacle_poses["x"] = random_number_generator_with_minimum_distance(
+        int(distance), int(maze_spread), int(obstacle_count))
+    # Sets y co-ordinates of the obstacle
+    obstacle_poses["y"] = random_number_generator_with_minimum_distance(
+        int(distance), int(maze_spread), int(obstacle_count))
     # Sets rotation angle along z axis
-    maze_poses["z"] = random_number_generator(int(wall_count))
+    obstacle_poses["z"] = random_number_generator(int(obstacle_count))
 
-    return maze_poses
+    return obstacle_poses
 
 
-def generate_maze(distance, maze_spread, wall_count, length):
+def generate_obstacles(distance, maze_spread, obstacle_count):
     iterator = {}
-    generated_maze = []
-    maze_poses = random_maze_generator(
-        distance, maze_spread, wall_count)
-    maze_x = maze_poses['x']
-    if maze_x == 'error':
+    obstacles = []
+    obstacles_poses = random_obstacle_generator(
+        int(distance), int(maze_spread), int(obstacle_count))
+    obstacles_x = obstacles_poses['x']
+    if obstacles_x == 'error':
         print('The given wall count is too high for the given area of a maze, please try again after altering the parameters')
         return 'error'
-    maze_y = maze_poses['y']
-    maze_z = maze_poses['z']
+    obstacles_y = obstacles_poses['y']
+    obstacles_z = obstacles_poses['z']
 
-    z_axis_rotation = [0, 1.8]
+    print(obstacles_x, obstacles_y, obstacles_z)
+    scam = [0, 1.57]
 
-    for i in range(len(maze_x)):
-        maze = f"""<link name='Wall_{i}'>
+    for i in range(len(obstacles_x)):
+        obstacle = f"""<link name='Wall_{i}'>
                         <collision name='Wall_{i}_Collision'>
                             <geometry>
                             <box>
-                                <size>{length} 0.15 2.5</size>
+                                <size>1.5 0.15 2.5</size>
                             </box>
                             </geometry>
                             <pose>0 0 1.25 0 -0 0</pose>
@@ -58,13 +44,13 @@ def generate_maze(distance, maze_spread, wall_count, length):
                             <pose>0 0 1.25 0 -0 0</pose>
                             <geometry>
                             <box>
-                                <size>{length} 0.15 2.5</size>
+                                <size>1.5 0.15 2.5</size>
                             </box>
                             </geometry>
                             <material>
                             <script>
                                 <uri>file://media/materials/scripts/gazebo.material</uri>
-                                <name>Gazebo/Grey</name>
+                                <name>Gazebo/Bricks</name>
                             </script>
                             <ambient>1 1 1 1</ambient>
                             </material>
@@ -72,11 +58,8 @@ def generate_maze(distance, maze_spread, wall_count, length):
                             <layer>0</layer>
                             </meta>
                         </visual>
-                        <pose>{maze_x[i]} {maze_y[i]} 0 0 -0 {z_axis_rotation[maze_z[i]]}</pose>
+                        <pose>{obstacles_x[i]} {obstacles_y[i]} 0 0 -0 {scam[obstacles_z[i]]}</pose>
                         </link>"""
-        generated_maze.append(maze)
+        obstacles.append(obstacle)
 
-    return generated_maze
-
-
-print(generate_maze(3, 50, 100, 20))
+    return obstacles

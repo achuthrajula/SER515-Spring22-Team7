@@ -27,7 +27,7 @@ def generate_maze(distance, maze_spread, wall_count, length):
     maze_y = maze_poses['y']
     maze_z = maze_poses['z']
 
-    z_axis_rotation = [0, 1.8]
+    z_axis_rotation = [0, 1.57]
 
     for i in range(len(maze_x)):
         maze = f"""<link name='Wall_{i}'>
