@@ -6,6 +6,7 @@ from ezRos.launch import Launcher
 from ezRos.environment_setup import Setup
 from ezRos.test_installations import Test
 from ezRos.gui import GUI
+from ezRos.maze_generator import MazeGenerator
 
 
 def main():
@@ -41,8 +42,8 @@ def main():
                 launch = Launcher()
                 launch.launch()
             elif user_input == '6':
-                launch = TestDrive()
-                launch.generateMaze()
+                maze = MazeGenerator()
+                maze.generate()
             elif user_input == '7':
                 launch = GUI()
                 launch.gui()
