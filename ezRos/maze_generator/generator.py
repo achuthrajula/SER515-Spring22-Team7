@@ -4,6 +4,7 @@ from alive_progress import alive_bar
 import time
 from ezRos.maze_generator.random_obstacles_generator import generate_obstacles
 from ezRos.maze_generator.random_maze_generator import generate_maze
+from ezRos.maze_generator.maze_boundary_generator import generate_boundary
 from copy import copy
 from _root_path import ROOT_DIRECTORY
 
@@ -30,13 +31,13 @@ class MazeGenerator:
 
         elif(user_requirement == 'm' or user_requirement == 'M'):
             maze_spread = input(
-                'Enter the spread area of the maze: [Suggested: 25-100] \n')
+                'Enter the spread area of the maze: [Suggested: 25-50] \n')
             number_of_walls = input(
-                'Enter the number of walls to be generated [Suggested: 50-100]\n')
+                'Enter the number of walls to be generated [Suggested: 25-40]\n')
             distance_between = input(
-                'Enter the minimum distance between the walls [Suggested: 3-5] \n')
+                'Enter the minimum distance between the walls [Suggested: 2-4] \n')
             length = input(
-                'Enter the length of the walls [Suggested: 20-50] \n')
+                'Enter the length of the walls [Suggested: 20-30] \n')
 
         else:
             return
@@ -74,6 +75,10 @@ class MazeGenerator:
                 if maze == 'error':
                     return
                 for wall in maze:
+                    wall_root = bs(wall, "lxml-xml")
+                    root.model.append(copy(wall_root.link))
+                boundary = generate_boundary(maze_spread)
+                for wall in boundary:
                     wall_root = bs(wall, "lxml-xml")
                     root.model.append(copy(wall_root.link))
 
