@@ -18,8 +18,8 @@ class TestDrive:
         available_sensors = ['laser','camera']
         required_sensors = []
         for sensor in available_sensors:
-            sensor_input=  input(f"""
-            Do you need the {sensor} sensor\n
+            sensor_input =  input(f"""
+            Do you need the {sensor} sensor:\n
             [0] No
             [1] Yes
             """)
