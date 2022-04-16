@@ -1,22 +1,4 @@
-
-from ezRos.maze_generator.utils import random_number_generator_with_minimum_distance, random_number_generator
-
-
-def random_maze_generator(distance, maze_spread, wall_count):
-    maze_poses = {}
-    # Sets x co-ordinates of the maze
-    maze_poses["x"] = random_number_generator_with_minimum_distance(
-        int(distance), int(maze_spread), int(wall_count))
-    # Sets y co-ordinates of the maze
-    maze_poses["y"] = random_number_generator_with_minimum_distance(
-        int(distance), int(maze_spread), int(wall_count))
-    # Sets rotation angle along z axis
-    maze_poses["z"] = random_number_generator(int(wall_count))
-
-    return maze_poses
-
-
-def generate_boundary(maze_spread, length):
+def generate_boundary(maze_spread):
     iterator = {}
     wall_names = ['boundary_1', 'boundary_2', 'boundary_3', 'boundary_4']
     generated_maze = []
