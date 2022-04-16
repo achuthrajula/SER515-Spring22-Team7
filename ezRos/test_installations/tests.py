@@ -1,6 +1,7 @@
 import os
 from _root_path import ROOT_DIRECTORY
 
+
 class Test:
 
     def __init__(self) -> None:
@@ -8,7 +9,7 @@ class Test:
 
     def test(self):
         input_command = 0
-        
+
         while input_command != "x":
             input_command = input(
                 """Commands: \n
@@ -16,22 +17,36 @@ class Test:
                 [2]: Tests ROS2 Installation
                 [3]: Tests Gazebo Installation
                 [4]: Tests Slam Installation
+                
+                [s]: Save the generated map
+                [n]: Use the generated map to navigate to the goal
 
                 x: To exit and return to main menu
                 """
             )
 
             if input_command == "1":
-                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/python/test_python.sh")
+                os.system(
+                    f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/python/test_python.sh")
 
             elif input_command == "2":
-                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/ros2/test_ros2.sh")
+                os.system(
+                    f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/ros2/test_ros2.sh")
 
             elif input_command == "3":
-                os.system(f"gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world")
+                os.system(
+                    f"gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world")
 
             elif input_command == "4":
-                os.system(f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/slam/slam_test.sh")
+                os.system(
+                    f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/slam/slam_test.sh")
+
+            elif input_command == "s":
+                os.system(
+                    f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/slam/slam_test_map_save.sh")
+            elif input_command == "n":
+                os.system(
+                    f"sudo bash {ROOT_DIRECTORY}/Installation-Scripts/slam/slam_test_map.sh")
 
             elif input_command == "x":
                 return
