@@ -83,7 +83,7 @@ sensor_generator = {
     'id': laser,
     'name':'laser_link',
     'pose_front': '0.7 0 0.62 0 0 0',
-    'pose_back': '-1 0 0.62 0 0 0',
+    'pose_back': '-1 0 0.62 0 -3.1 0',
     'collision_pose' : '0 0 -0.0145 0 0 0',
     'collision_size' : '0.05 0.05 0.041',
     'visual_geometry': """
@@ -97,7 +97,7 @@ sensor_generator = {
     'id':camera,
     'name': 'camera_link',
     'pose_front': '0.6 0.2 0.68 0 0 0',
-    'pose_back': '-1 0.2 0.68 0 0 0',
+    'pose_back': '-0.8 0.2 0.68 0 0 0',
     'collision_pose' : '0 0 0 0 0 0',
     'collision_size' : '0.15 0.3 0.15',
     'visual_geometry': """
