@@ -22,3 +22,17 @@ This repository is a python module to make ROS2 easier to implement using a Obje
 - Launch ROS2, fires ROS2 with the user specified nodes and sets up the network. As a placeholder we currently put a couple of turtlesim nodes
 
 - Generating maze.
+
+
+### Credits
+ - Addison Sears-Collins
+  - https://automaticaddison.com
+
+
+### Contributors
+- Prasuna Bumadi
+- Nikitha Reddy Junuthula
+- Achuth Reddy Rajula
+- Varshik Sonti
+- Rajiv Kashyap Jalakam
+- Shivani Patel
